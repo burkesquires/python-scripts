@@ -42,10 +42,10 @@ class Caesar():
         return self.__crypt('decrypt')
 
 def invokeCipher(cipher, key, text, e_mode):
-    if e_mode == 'E' or e_mode == 'e':
+    if e_mode in ['E', 'e']:
         print('\n====================RESULT====================')
         return cipher.encrypt(text, key)
-    elif e_mode == 'D' or e_mode == 'd':
+    elif e_mode in ['D', 'd']:
         print('\n====================RESULT====================')
         return cipher.decrypt(text, key)
     else:

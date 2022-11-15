@@ -5,9 +5,9 @@ ascii_characters_by_surface = r'`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZm
 def convert_to_ascii_art(image):
     ascii_art = []
     (width, height) = image.size
-    for y in range(0, height - 1):
+    for y in range(height - 1):
         line = ''
-        for x in range(0, width - 1):
+        for x in range(width - 1):
             px = image.getpixel((x, y))
             line += convert_pixel_to_character(px)
         ascii_art.append(line)

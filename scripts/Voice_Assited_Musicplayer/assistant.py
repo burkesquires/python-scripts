@@ -67,10 +67,9 @@ while True:
         get_ind = song_playlist.index(command)
         playlist_name = playlist.index(command)
         playlist_name = playlist[get_ind]
-        playlist_dir = os.path.abspath("./Songs/"+playlist_name)
-        bot_answer('Playing: '+playlist_name +
-                   'playlist for you with Musicplayer')
-        speak('playing:'+playlist_name+'playlist for you with music player')
+        playlist_dir = os.path.abspath(f"./Songs/{playlist_name}")
+        bot_answer(f'Playing: {playlist_name}playlist for you with Musicplayer')
+        speak(f'playing:{playlist_name}playlist for you with music player')
         print(playlist_dir)
         run(playlist_dir)
     elif 'stop' in command:

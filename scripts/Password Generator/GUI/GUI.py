@@ -47,31 +47,32 @@ def save():
     if len(website) == 0 or len(password) == 0:
         messagebox.showerror(title="Oops!", message="Please make sure you haven't left any fields empty.")
 
-    else:
-        ok_user = messagebox.askokcancel(title=website, message=f"These are the details entered:\nEmail: {email}"
-                                                                    f"\nPassword: {password} \nIs it okay to save?")
-        if ok_user:
-            try:
-                with open("data.json", "r") as data_file:
-                    # Reading old data
-                    data = json.load(data_file)
-            except FileNotFoundError:
-                with open("data.json", "w") as data_file:
-                    json.dump(new_data, data_file, indent=4)
-            except json.JSONDecodeError:
-                data = dict()
+    elif ok_user := messagebox.askokcancel(
+        title=website,
+        message=f"These are the details entered:\nEmail: {email}"
+        f"\nPassword: {password} \nIs it okay to save?",
+    ):
+        try:
+            with open("data.json", "r") as data_file:
+                # Reading old data
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open("data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        except json.JSONDecodeError:
+            data = {}
 
-            else:
+        else:
                 # Updating old data with new data
-                data.update(new_data)
+            data |= new_data
 
-                with open("data.json", "w") as data_file:
-                    # Saving updated data
-                    json.dump(data, data_file, indent=4)
+            with open("data.json", "w") as data_file:
+                # Saving updated data
+                json.dump(data, data_file, indent=4)
 
-            finally:
-                website_entry.delete(0, END)
-                password_entry.delete(0, END)
+        finally:
+            website_entry.delete(0, END)
+            password_entry.delete(0, END)
 
 
 # ---------------------------- SEARCH PASSWORD ------------------------------- #

@@ -17,7 +17,7 @@ ROUTING_KEY = os.environ['ROUTING_KEY'] # ENTER EVENTS V2 API INTEGRATION KEY HE
 def trigger_incident(payload):
     # Triggers a PagerDuty incident without a previously generated incident key
     # Uses Events V2 API - documentation: https://v2.developer.pagerduty.com/docs/send-an-event-events-api-v2
-    
+
     header = {
         "Content-Type": "application/json"
     }
@@ -33,7 +33,7 @@ def trigger_incident(payload):
             "class":f"{payload['error_code']}",
             "custom_details":f"{payload['system_data']}"
 
-            
+
 
 
         }
@@ -42,7 +42,7 @@ def trigger_incident(payload):
     response = requests.post('https://events.pagerduty.com/v2/enqueue', 
                             data=json.dumps(payload),
                             headers=header)
-	
+
     if response.json()["status"] == "success":
         print('Incident created with with dedup key (also known as incident / alert key) of ' + '"' + response.json()['dedup_key'] + '"') 
     else:

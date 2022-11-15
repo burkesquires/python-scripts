@@ -22,8 +22,7 @@ def download_videos():
 	playlist_item_by_id = api.get_playlist_items(
 		playlist_id=playlist_id, count=None, return_json=True)
 
-	for index, videoid in enumerate(playlist_item_by_id['items']):
-
+	for videoid in playlist_item_by_id['items']:
 		link = f"https://www.youtube.com/watch?v={videoid['contentDetails']['videoId']}"
 
 		yt_obj = YouTube(link)

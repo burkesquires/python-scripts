@@ -42,9 +42,16 @@ class Player(tk.Frame):
         self.track.config(width=400, height=300)
         self.track.grid(row=0, column=0, padx=1)
 
-        self.tracklist = tk.LabelFrame(self, text=f'PlayList - {str(len(self.playlist))}',
-                                       font=("times new roman", 12, "bold"),
-                                       bg="black", fg="white", bd=5, relief=tk.GROOVE)
+        self.tracklist = tk.LabelFrame(
+            self,
+            text=f'PlayList - {len(self.playlist)}',
+            font=("times new roman", 12, "bold"),
+            bg="black",
+            fg="white",
+            bd=5,
+            relief=tk.GROOVE,
+        )
+
         self.tracklist.config(width=190, height=200)
         self.tracklist.grid(row=0, column=1, pady=1)
 
@@ -159,7 +166,7 @@ class Player(tk.Frame):
         with open('songs2.pickle', 'wb') as f:
             pickle.dump(self.songlist2, f)
         self.playlist = self.songlist2
-        self.tracklist['text'] = f'PlayList - {str(len(self.playlist))}'
+        self.tracklist['text'] = f'PlayList - {len(self.playlist)}'
         self.list.delete(0, tk.END)
 
         self.enum_songs()
@@ -171,19 +178,19 @@ class Player(tk.Frame):
         for root_, dirs, files in os.walk(directory):
             for file in files:
                 if os.path.splitext(file)[1] == '.mp3':
-                    path = (root_ + '/' + file).replace('\\', '/')
+                    path = f'{root_}/{file}'.replace('\\', '/')
                     self.songlist.append(path)
                 elif os.path.splitext(file)[1] == '.mpeg':
-                    path = (root_ + '/' + file).replace('\\', '/')
+                    path = f'{root_}/{file}'.replace('\\', '/')
                     self.songlist.append(path)
                 elif os.path.splitext(file)[1] == '.wav':
-                    path = (root_ + '/' + file).replace('\\', '/')
+                    path = f'{root_}/{file}'.replace('\\', '/')
                     self.songlist.append(path)
 
         with open('songs.pickle', 'wb') as f:
             pickle.dump(self.songlist, f)
         self.playlist = self.songlist
-        self.tracklist['text'] = f'PlayList - {str(len(self.playlist))}'
+        self.tracklist['text'] = f'PlayList - {len(self.playlist)}'
         self.list.delete(0, tk.END)
         self.enum_songs()
 
@@ -261,7 +268,7 @@ class Player(tk.Frame):
         for item in items:
             self.list.delete(item)
             self.playlist.pop(item)
-        self.tracklist['text'] = 'Total Songs: ' + str(len( self.playlist))
+        self.tracklist['text'] = f'Total Songs: {len(self.playlist)}'
         
     
      

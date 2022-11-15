@@ -142,7 +142,7 @@ class Piece(object):
 
 
 def create_grid(locked_positions={}):
-    grid = [[(0,0,0) for x in range(10)] for x in range(20)]
+    grid = [[(0,0,0) for _ in range(10)] for _ in range(20)]
 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
@@ -158,9 +158,11 @@ def convert_shape_format(shape):
 
     for i, line in enumerate(format):
         row = list(line)
-        for j, column in enumerate(row):
-            if column == '0':
-                positions.append((shape.x + j, shape.y + i))
+        positions.extend(
+            (shape.x + j, shape.y + i)
+            for j, column in enumerate(row)
+            if column == '0'
+        )
 
     for i, pos in enumerate(positions):
         positions[i] = (pos[0] - 2, pos[1] - 4)
@@ -173,12 +175,9 @@ def valid_space(shape, grid):
     accepted_positions = [j for sub in accepted_positions for j in sub]
     formatted = convert_shape_format(shape)
 
-    for pos in formatted:
-        if pos not in accepted_positions:
-            if pos[1] > -1:
-                return False
-
-    return True
+    return not any(
+        pos not in accepted_positions and pos[1] > -1 for pos in formatted
+    )
 
 
 def check_lost(positions):
@@ -284,7 +283,7 @@ def main():
     level_time = 0
     fall_speed = 0.27
     score = 0
-    
+
     while run:
 
         grid = create_grid(locked_positions)
@@ -292,11 +291,11 @@ def main():
         level_time += clock.get_rawtime()
         clock.tick()
 
-        if level_time/1000 > 4:
+        if level_time > 4000:
             level_time = 0
             if fall_speed > 0.15:
                 fall_speed -= 0.005
-            
+
 
         # PIECE FALLING CODE
         if fall_time/1000 >= fall_speed:

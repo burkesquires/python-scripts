@@ -34,7 +34,7 @@ def resetWritingLabels():
     text = random.choice(possibleTexts).lower()
     splitPoint = 0
     global labelLeft
-    labelLeft = Label(root, text=text[0:splitPoint], fg='grey')
+    labelLeft = Label(root, text=text[:splitPoint], fg='grey')
     labelLeft.place(relx=0.5, rely=0.5, anchor=E)
 
     global labelRight
@@ -46,7 +46,7 @@ def resetWritingLabels():
     currentLetterLabel.place(relx=0.5, rely=0.6, anchor=N)
 
     global timeleftLabel
-    timeleftLabel = Label(root, text=f'0 Seconds', fg='grey')
+    timeleftLabel = Label(root, text='0 Seconds', fg='grey')
     timeleftLabel.place(relx=0.5, rely=0.4, anchor=S)
 
     global writeAble
@@ -62,9 +62,9 @@ def resetWritingLabels():
 def stopTest():
     global writeAble
     writeAble = False
-    
+
     amountWords = len(labelLeft.cget('text').split(' '))
-    
+
     timeleftLabel.destroy()
     currentLetterLabel.destroy()
     labelRight.destroy()
@@ -75,7 +75,7 @@ def stopTest():
     ResultLabel.place(relx=0.5, rely=0.4, anchor=CENTER)
 
     global ResultButton
-    ResultButton = Button(root, text=f'Retry', command=restart)
+    ResultButton = Button(root, text='Retry', command=restart)
     ResultButton.place(relx=0.5, rely=0.6, anchor=CENTER)
 
 def restart():

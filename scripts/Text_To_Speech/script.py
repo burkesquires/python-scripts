@@ -9,52 +9,52 @@ option = int(input("Select option: "))
 if option == 1:
     language = 'en'
     tld1 = 'com.au'
-if option == 2:
-    language = 'en'
-    tld1 = 'co.uk'
-if option == 3:
-    language = 'en'
-    tld1 = 'com'
-if option == 4:
-    language = 'en'
-    tld1 = 'ca'
-if option == 5:
-    language = 'en'
-    tld1 = 'co.in'
-if option == 6:
-    language = 'en'
-    tld1 = 'ie'
-if option == 7:
-    language = 'en'
-    tld1 = 'co.za'
-if option == 8:
-    language = 'fr'
-    tld1 = 'ca'
-if option == 9:
-    language = 'fr'
-    tld1 = 'fr'
-if option == 10:
+elif option == 10:
     language = 'zh-CN'
     tld1 = 'com'
-if option == 11:
+elif option == 11:
     language = 'zh-TW'
     tld1 = 'com'
-if option == 12:
+elif option == 12:
     language = 'pt'
     tld1 = 'com.br'
-if option == 13:
+elif option == 13:
     language = 'pt'
     tld1 = 'pt'
-if option == 14:
+elif option == 14:
     language = 'es'
     tld1 = 'com.mx'
-if option == 15:
+elif option == 15:
     language = 'es'
     tld1 = 'es'
-if option == 16:
+elif option == 16:
     language = 'es'
     tld1 = 'com'
 
+elif option == 2:
+    language = 'en'
+    tld1 = 'co.uk'
+elif option == 3:
+    language = 'en'
+    tld1 = 'com'
+elif option == 4:
+    language = 'en'
+    tld1 = 'ca'
+elif option == 5:
+    language = 'en'
+    tld1 = 'co.in'
+elif option == 6:
+    language = 'en'
+    tld1 = 'ie'
+elif option == 7:
+    language = 'en'
+    tld1 = 'co.za'
+elif option == 8:
+    language = 'fr'
+    tld1 = 'ca'
+elif option == 9:
+    language = 'fr'
+    tld1 = 'fr'
 tts = gTTS(text=mytext, tld=tld1, lang=language, slow=False)
 audio_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "tts.mp3")
 tts.save(audio_file)

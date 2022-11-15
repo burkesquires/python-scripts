@@ -21,20 +21,20 @@ def send_sms(number):
 
     data_sms = {
         "type": "TXN",
-        "to": "+91{}".format(str(number)),
+        "to": f"+91{str(number)}",
         "sender": senderID,
         "source": "API",
-        "body": "Thank you {} for using this software.".format(
-            "name"
-        ),  # change the body of the messages
-        "template_id": "1207161891861378858",  # enter registered template id
+        "body": 'Thank you name for using this software.',
+        "template_id": "1207161891861378858",
     }
 
+
     response = requests.post(
-        "https://api.kaleyra.io/v1/{}/messages".format(SID),
+        f"https://api.kaleyra.io/v1/{SID}/messages",
         headers=headers_sms,
         data=data_sms,
     )
+
     return response.json()
 
 
@@ -46,9 +46,10 @@ def number_val(number):
     }
 
     response = requests.get(
-        "https://api.kaleyra.io/v1/{}/lookup/+91{}".format(SID, str(number)),
+        f"https://api.kaleyra.io/v1/{SID}/lookup/+91{str(number)}",
         headers=headers,
     )
+
     if response.json()["invalid_count"]:
         return False, response.json()
     else:
@@ -62,18 +63,18 @@ def send_flash_sms(number):
     }
 
     data = {
-        "to": "+91{}".format(str(number)),
+        "to": f"+91{str(number)}",
         "type": "TXN",
         "sender": senderID,
-        "body": "Thank you {} for using this software.".format(
-            "name"
-        ),  # change the body of the messages
+        "body": 'Thank you name for using this software.',
         "flash": "1",
     }
 
+
     response = requests.post(
-        "https://api.kaleyra.io/v1/{}/messages".format(SID), headers=headers, data=data
+        f"https://api.kaleyra.io/v1/{SID}/messages", headers=headers, data=data
     )
+
     return response.json()
 
 
@@ -88,7 +89,9 @@ while True:
     print("------------------------------------------------------------------")
     userInput = int(input("Enter the option number you want to perform: "))
 
-    if userInput == 1:
+    if userInput == 0:
+        break
+    elif userInput == 1:
         number = int(input("Enter the phone number to which you want to send: "))
         out = send_sms(number)
         print("------------------------------------------------------------------")
@@ -108,11 +111,7 @@ while True:
         if out[0]:
             print("------------------------------------------------------------------")
             print("Valid Number, details below")
-            print(out[1])
         else:
             print("------------------------------------------------------------------")
             print("Invalid Number")
-            print(out[1])
-
-    elif userInput == 0:
-        break
+        print(out[1])

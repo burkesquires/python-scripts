@@ -10,7 +10,7 @@ import json
 
 os.makedirs('Wallhaven', exist_ok=True)
 BASEURL="https://wallhaven.cc/api/v1/w/"
-cookies=dict()
+cookies = {}
 
 global APIKEY
 APIKEY = ""
@@ -50,21 +50,18 @@ def category():
     ptags = {'sfw':'100', 'sketchy':'010', 'nsfw':'001', 'ws':'110', 'wn':'101', 'sn':'011', 'all':'111'}
     ptag = ptags[pcode]
 
-    BASEURL = 'https://wallhaven.cc/api/v1/search?apikey=' + APIKEY + "&categories=" +\
-        ctag + '&purity=' + ptag + '&page='
+    BASEURL = f'https://wallhaven.cc/api/v1/search?apikey={APIKEY}&categories={ctag}&purity={ptag}&page='
 
 def latest():
     global BASEURL
     print('Downloading latest')
     topListRange = '1M'
-    BASEURL = 'https://wallhaven.cc/api/v1/search?apikey=' + APIKEY + '&topRange=' +\
-    topListRange + '&sorting=toplist&page='
+    BASEURL = f'https://wallhaven.cc/api/v1/search?apikey={APIKEY}&topRange={topListRange}&sorting=toplist&page='
 
 def search():
     global BASEURL
     query = input('Enter search query: ')
-    BASEURL = 'https://wallhaven.cc/api/v1/search?apikey=' + APIKEY + '&q=' + \
-        urllib.parse.quote_plus(query) + '&page='
+    BASEURL = f'https://wallhaven.cc/api/v1/search?apikey={APIKEY}&q={urllib.parse.quote_plus(query)}&page='
 
 def downloadPage(pageId, totalImage):
     url = BASEURL + str(pageId)
@@ -76,20 +73,20 @@ def downloadPage(pageId, totalImage):
         currentImage = (((pageId - 1) * 24) + (i + 1))
 
         url = pageData[i]["path"]
-        
+
         filename = os.path.basename(url)
         osPath = os.path.join('Wallhaven', filename)
         if not os.path.exists(osPath):
             imgreq = requests.get(url, cookies=cookies)
             if imgreq.status_code == 200:
-                print("Downloading : %s - %s / %s" % (filename, currentImage , totalImage))
+                print(f"Downloading : {filename} - {currentImage} / {totalImage}")
                 with open(osPath, 'ab') as imageFile:
                     for chunk in imgreq.iter_content(1024):
                         imageFile.write(chunk)
-            elif (imgreq.status_code != 403 and imgreq.status_code != 404):
-                print("Unable to download %s - %s / %s" % (filename, currentImage , totalImage))
+            elif imgreq.status_code not in [403, 404]:
+                print(f"Unable to download {filename} - {currentImage} / {totalImage}")
         else:
-            print("%s already exist - %s / %s" % (filename, currentImage , totalImage))
+            print(f"{filename} already exist - {currentImage} / {totalImage}")
 
 def main():
     Choice = input('''Choose how you want to download the image:
@@ -113,7 +110,7 @@ def main():
 
     pgid = int(input('How Many pages you want to Download: '))
     totalImageToDownload = str(24 * pgid)
-    print('Number of Wallpapers to Download: ' + totalImageToDownload)
+    print(f'Number of Wallpapers to Download: {totalImageToDownload}')
     for j in range(1, pgid + 1):
         downloadPage(j, totalImageToDownload)
 

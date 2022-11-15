@@ -16,11 +16,11 @@ urls = [
 def downloadImage(image_urls):
     crtFileLocation =  os.getcwd()
     os.makedirs('Images')
-    
-    for x in range(0, len(image_urls)):
-      filename =  'image_' +  str(x) + '.png'
-      print(f'downloading {x+1} out of {len(image_urls)} images')
-      urllib.request.urlretrieve(image_urls[x], os.path.join(crtFileLocation, 'Images', filename))
+
+    for x in range(len(image_urls)):
+        filename = f'image_{str(x)}.png'
+        print(f'downloading {x+1} out of {len(image_urls)} images')
+        urllib.request.urlretrieve(image_urls[x], os.path.join(crtFileLocation, 'Images', filename))
 
 downloadImage(urls)
 

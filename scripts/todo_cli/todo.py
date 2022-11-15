@@ -37,10 +37,9 @@ def option_ls():
     todo = []
     try:
         with open(todo_file, "r") as f1:
-            for i in f1:
-                todo.append(i)
+            todo.extend(iter(f1))
         for i in range(len(todo) - 1, -1, -1):
-            sys.stdout.buffer.write("[{}] {}\n".format(i + 1, todo[i][:-1]).encode('utf8'))
+            sys.stdout.buffer.write(f"[{i + 1}] {todo[i][:-1]}\n".encode('utf8'))
     except FileNotFoundError:
         print("There are no pending todos!")
 
@@ -56,7 +55,7 @@ def option_del(todo_to_delete):
             with open(todo_file, "w") as f1:
                 for i in todo:
                     f1.write(i)
-            print("Deleted todo #{}".format(todo_to_delete))
+            print(f"Deleted todo #{todo_to_delete}")
     except FileNotFoundError:
         print("There are no pending todos! Nothing deleted.")
     except ValueError:
@@ -68,7 +67,7 @@ def option_done(mark_done):
         with open(todo_file, "r") as f1:
             todo = f1.readlines()
         if mark_done > len(todo) or mark_done == 0:
-            print("Error: todo #{} does not exist.".format(mark_done))
+            print(f"Error: todo #{mark_done} does not exist.")
             return
 
         dodo = todo[mark_done - 1]
@@ -167,14 +166,14 @@ elif arg[1] == "done":
         option_done(int(arg[2]))
 elif arg[1] == "report":
     option_report()
-elif arg[1] == "--version" or arg[1] == '-v':
+elif arg[1] in ["--version", '-v']:
     print("ToDo 1.0")
 elif arg[1] == "archive":
     option_archive()
-elif arg[1] == "--print" or arg[1] == '-p':
+elif arg[1] in ["--print", '-p']:
     if len(arg) < 3:
         print("No file name entered!")
     else:
         option_print(arg[2])
 else:
-    print("ERROR: unknown command \"{}\"".format(arg[1]))
+    print(f'ERROR: unknown command \"{arg[1]}\"')

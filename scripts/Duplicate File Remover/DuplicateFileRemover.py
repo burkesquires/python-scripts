@@ -27,12 +27,12 @@ if __name__ == "__main__":
     for f in filelist:
         key = hashFile(f)
         # If key already exists, it deletes the file
-        if key in hashMap.keys():
+        if key in hashMap:
             deletedFiles.append(f)
             os.remove(f)
         else:
             hashMap[key] = f
-    if len(deletedFiles) != 0:
+    if deletedFiles:
         print('Deleted Files')
         for i in deletedFiles:
             print(i)

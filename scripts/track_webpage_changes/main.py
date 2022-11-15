@@ -17,24 +17,23 @@ while True:
     for script in soup(["script", "style"]):
         script.extract()
     soup = soup.get_text()
-    
-    if PrevVersion != soup:
-        if FirstRun == True:
-            PrevVersion = soup
-            FirstRun = False
-            print("Started Monitoring " + url + " " + str(datetime.now()))
-        else:
-            print("Changes detected at: " + str(datetime.now()))
-            OldPage = PrevVersion.splitlines()
-            NewPage = soup.splitlines()
-            d = difflib.Differ()
-            diff = d.compare(OldPage, NewPage)
-            out_text = "\n".join([ll.rstrip() for ll in '\n'.join(diff).splitlines() if ll.strip()])
-            #print(out_text)
-            OldPage = NewPage
-            # print ('\n'.join(diff))
-            PrevVersion = soup
+
+    if PrevVersion == soup:
+        print(f"No Changes Detected {str(datetime.now())}")
+    elif FirstRun == True:
+        PrevVersion = soup
+        FirstRun = False
+        print(f"Started Monitoring {url} {str(datetime.now())}")
     else:
-        print("No Changes Detected " + str(datetime.now()))
+        print(f"Changes detected at: {str(datetime.now())}")
+        OldPage = PrevVersion.splitlines()
+        NewPage = soup.splitlines()
+        d = difflib.Differ()
+        diff = d.compare(OldPage, NewPage)
+        out_text = "\n".join([ll.rstrip() for ll in '\n'.join(diff).splitlines() if ll.strip()])
+        #print(out_text)
+        OldPage = NewPage
+        # print ('\n'.join(diff))
+        PrevVersion = soup
     time.sleep(interval)
     continue

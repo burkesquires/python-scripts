@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 
 
 def get_lyrics(artist, song):
-    song_url = 'http://www.azlyrics.com/lyrics/' + artist + '/' + song + '.html'
+    song_url = f'http://www.azlyrics.com/lyrics/{artist}/{song}.html'
 
     response = requests.get(song_url)
 

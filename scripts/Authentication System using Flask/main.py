@@ -32,8 +32,9 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField("Register")
 
     def validate_username(self, username):
-        existing_user_username = User.query.filter_by(username=username.data).first()
-        if existing_user_username:
+        if existing_user_username := User.query.filter_by(
+            username=username.data
+        ).first():
             raise ValidationError("That username already exists! Try a different one.")
 
 class LoginForm(FlaskForm):
@@ -64,8 +65,7 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user:
+        if user := User.query.filter_by(username=form.username.data).first():
             if bcrypt.check_password_hash(user.password, form.password.data):
                 login_user(user)
                 return redirect(url_for('dashboard'))

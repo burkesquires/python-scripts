@@ -8,8 +8,5 @@ reader = easyocr.Reader(languages, gpu=gpu)
 IMG_PATH = 'test1.png'
 result = reader.readtext(IMG_PATH)
 
-text = ''
-for tup in result:
-  text += tup[1]
-
+text = ''.join(tup[1] for tup in result)
 print(text)

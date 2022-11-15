@@ -5,12 +5,9 @@ import subprocess
 
 # Seeing if the file exists
 if os.path.exists(sys.argv[1]):
-    # Open Only if the file exists on the computer
-    f = open(sys.argv[1], "r")
-    # Storing the Content of the file in the f_contents variable
-    f_contents = f.read()
-    # closing the opened file
-    f.close()
+    with open(sys.argv[1], "r") as f:
+        # Storing the Content of the file in the f_contents variable
+        f_contents = f.read()
 else:
   # If the file Doesn't Exists
     print("File Not found : copy2clip <file_name>")
