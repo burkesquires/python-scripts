@@ -6,25 +6,25 @@ import sys
 def scanHost(ip, startPort, endPort):
     """ Starts a TCP scan on any given IP address """
 
-    print('[*] Starting TCP port scan on host %s' % ip)
+    print(f'[*] Starting TCP port scan on host {ip}')
 
     # Begin TCP scan on host
     tcp_scan(ip, startPort, endPort)
 
-    print('[+] TCP scan on host %s complete' % ip)
+    print(f'[+] TCP scan on host {ip} complete')
 
 
 def scanRange(network, startPort, endPort):
     """ Starts a TCP scan on a given IP address range """
 
-    print('[*] Starting TCP port scan on network %s.0' % network)
+    print(f'[*] Starting TCP port scan on network {network}.0')
 
     # Iterate over a range of host IP addresses and scan each target
     for host in range(1, 255):
-        ip = network + '.' + str(host)
+        ip = f'{network}.{str(host)}'
         tcp_scan(ip, startPort, endPort)
 
-    print('[+] TCP scan on network %s.0 complete' % network)
+    print(f'[+] TCP scan on network {network}.0 complete')
 
 
 def tcp_scan(ip, startPort, endPort):
@@ -58,10 +58,10 @@ if __name__ == '__main__':
 
         elif len(sys.argv) == 5 and sys.argv[4] == "-n":
             scanRange(network, startPort, endPort)
-        
+
         else:
             raise exception
-    
+
     except:
         print('Error: unrecognized or incomplete command line')
         print('usage: ./scanner.py <IP address> <start port> <end port>')

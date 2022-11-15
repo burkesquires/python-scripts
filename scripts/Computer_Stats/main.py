@@ -29,7 +29,7 @@ def get_size(bytes, suffix="B"):
             return f"{bytes:.2f}{unit}{suffix}"
         bytes /= factor
 
-data = { # Json object to store all of the data. Values can be added and removed.
+data = {
     "system": {
         "system": uname.system,
         "nodes": uname.node,
@@ -39,7 +39,7 @@ data = { # Json object to store all of the data. Values can be added and removed
         "processor": uname.processor,
         "ip adress": socket.gethostbyname(socket.gethostname()),
         "mac adress": ':'.join(re.findall('..', '%012x' % uuid.getnode())),
-        "ram": str(round(psutil.virtual_memory().total / (1024.0 **3)))+" GB",
+        "ram": f"{str(round(psutil.virtual_memory().total / 1024.0**3))} GB",
     },
     "boot_time": {
         "time": f"{bt.year}/{bt.month}/{bt.day} {bt.hour}:{bt.minute}:{bt.second}"
@@ -50,19 +50,19 @@ data = { # Json object to store all of the data. Values can be added and removed
         "max frequency": f"{cpufreq.max:.2f}Mhz",
         "min frequency": f"{cpufreq.min:.2f}Mhz",
         "current frequency": f"{cpufreq.current:.2f}Mhz",
-        "total cpu usage": f"{psutil.cpu_percent()}%"
+        "total cpu usage": f"{psutil.cpu_percent()}%",
     },
     "memory_info": {
         "total": f"{get_size(svmem.total)}",
         "available": f"{get_size(svmem.available)}",
         "used": f"{get_size(svmem.used)}",
-        "percentage": f"{svmem.percent}%"
+        "percentage": f"{svmem.percent}%",
     },
     "disk_info": {
         "total": f"{int(disk.total / (1024.0 ** 3))} GB",
         "used": f"{int(disk.used / (1024.0 ** 3))} GB",
         "free": f"{int(disk.free / (1024.0 ** 3))} GB",
-    }
+    },
 }
 
 # All functions below do get every key and value from data object at the top and logs it to console.
@@ -151,5 +151,3 @@ if __name__ == "__main__":
         with open("./log.json","w") as file:
             json.dump(data, file, ensure_ascii=False, indent=2)
         print("Stats saved successfully. You can find the logs at logs.json")
-    else:
-        pass

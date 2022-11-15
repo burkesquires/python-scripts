@@ -15,11 +15,7 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
   fig.colorbar(cax)
 
   # Are there a list of classes?
-  if classes:
-    labels = classes
-  else:
-    labels = np.arange(cm.shape[0])
-  
+  labels = classes or np.arange(cm.shape[0])
   # Label the axes
   ax.set(title="Confusion Matrix",
          xlabel="Predicted label",
@@ -28,7 +24,7 @@ def make_confusion_matrix(y_true, y_pred, classes=None, figsize=(10, 10), text_s
          yticks=np.arange(n_classes), 
          xticklabels=labels, # axes will labeled with class names (if they exist) or ints
          yticklabels=labels)
-  
+
   # Make x-axis labels appear on bottom
   ax.xaxis.set_label_position("bottom")
   ax.xaxis.tick_bottom()

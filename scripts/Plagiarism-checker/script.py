@@ -10,7 +10,7 @@ def Plagiarism_Checker(files, student):
     # comparing of two data from two text files
     similarity = lambda doc1, doc2: cosine_similarity([doc1, doc2])
     vectors = list(zip(files, v(student)))
-    
+
     for stud, text_vector_a in vectors:
         n_vectors = vectors.copy()
         i = n_vectors.index((stud, text_vector_a))

@@ -6,7 +6,7 @@ def compressImage(filename):
     img = Image.open(filename)
     myHeight, myWidth = img.size
     img = img.resize((myHeight,myWidth), Image.ANTIALIAS)
-    img.save("compressed-"+filename)
+    img.save(f"compressed-{filename}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

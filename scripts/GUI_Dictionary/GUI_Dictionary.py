@@ -12,8 +12,7 @@ dictionary = PyDictionary()
 
 
 def getMeaning():
-    response = dictionary.meaning(word.get())
-    if (response):
+    if response := dictionary.meaning(word.get()):
         if ('Noun' in response):
             meaning = response['Noun'][0]
         elif ('Verb' in response):

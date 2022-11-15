@@ -23,30 +23,27 @@ async def root():
 @app.get("/movies/")
 async def read_item(emotion: str):
   urlhere=""
-  if(emotion == "Sad"):
-    urlhere = 'http://www.imdb.com/search/title?genres=drama&title_type=feature&sort=moviemeter, asc'
-
-  elif(emotion == "Disgust"):
-    urlhere = 'http://www.imdb.com/search/title?genres=musical&title_type=feature&sort=moviemeter, asc'
-
-  elif(emotion == "Anger"):
+  if emotion == "Anger":
     urlhere = 'http://www.imdb.com/search/title?genres=family&title_type=feature&sort=moviemeter, asc'
 
-  elif(emotion == "Anticipation"):
+  elif emotion in {"Anticipation", "Enjoyment"}:
     urlhere = 'http://www.imdb.com/search/title?genres=thriller&title_type=feature&sort=moviemeter, asc'
 
-  elif(emotion == "Fear"):
+  elif emotion == "Disgust":
+    urlhere = 'http://www.imdb.com/search/title?genres=musical&title_type=feature&sort=moviemeter, asc'
+
+  elif emotion == "Fear":
     urlhere = 'http://www.imdb.com/search/title?genres=sport&title_type=feature&sort=moviemeter, asc'
 
-  elif(emotion == "Enjoyment"):
-    urlhere = 'http://www.imdb.com/search/title?genres=thriller&title_type=feature&sort=moviemeter, asc'
+  elif emotion == "Sad":
+    urlhere = 'http://www.imdb.com/search/title?genres=drama&title_type=feature&sort=moviemeter, asc'
 
-  elif(emotion == "Trust"):
-    urlhere = 'http://www.imdb.com/search/title?genres=western&title_type=feature&sort=moviemeter, asc'
-
-  elif(emotion == "Surprise"):
+  elif emotion == "Surprise":
     urlhere = 'http://www.imdb.com/search/title?genres=film_noir&title_type=feature&sort=moviemeter, asc'
 
+
+  elif emotion == "Trust":
+    urlhere = 'http://www.imdb.com/search/title?genres=western&title_type=feature&sort=moviemeter, asc'
 
   response = HTTP.get(urlhere)
   data = response.text

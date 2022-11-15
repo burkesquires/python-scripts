@@ -23,7 +23,10 @@ import nltk
 # nltk.download('stopwords')
 from nltk.corpus import stopwords
 review = review.split()  # the split finction converts the string into list
-review = [word for word in review if not word in set(stopwords.words('english'))]
+review = [
+    word for word in review if word not in set(stopwords.words('english'))
+]
+
 
 #Stemming .. replace words which are similar like love and loved to the root word like love
 from nltk.stem.porter import PorterStemmer
@@ -36,10 +39,9 @@ review = ml
 
 #joining the words to make a string of cleaned words
 review = ' '.join(review) # list is converted back to string
-    
 
-corpus = []
-corpus.append(review) # string is put back into a list (as a combined string)
+
+corpus = [review]
 # print(len(corpus))
 ##---------------------------------
 #Now the above cleaning is applied to all the remaning records from index 1 to 999
@@ -48,7 +50,10 @@ for i in range(1,1000):
     review1 = re.sub('[^a-zA-Z]',' ',dataset['Review'][i])
     review1 = review1.lower()
     review1 = review1.split()
-    review1 = [word for word in review1 if not word in set(stopwords.words('english'))]
+    review1 = [
+        word for word in review1 if word not in set(stopwords.words('english'))
+    ]
+
     ml1 = []
     for word in review1:
         st1 = ps.stem(word)
@@ -113,7 +118,10 @@ review2 = re.sub('[^a-zA-Z]',' ',userinput) #.. removing letters other than a to
 review2 = review2.lower()
 
 review2 = review2.split()
-review2 = [word for word in review2 if not word in set(stopwords.words('english'))]
+review2 = [
+    word for word in review2 if word not in set(stopwords.words('english'))
+]
+
 
 ml13 = []
 for word in review2:

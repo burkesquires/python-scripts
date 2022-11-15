@@ -3,10 +3,7 @@ from calendar import isleap
 
 # judge the leap year
 def judge_leap_year(year):
-    if isleap(year):
-        return True
-    else:
-        return False
+    return bool(isleap(year))
 
 
 # returns the number of days in each month
@@ -17,7 +14,7 @@ def month_days(month, leap_year):
         return 30
     elif month == 2 and leap_year:
         return 29
-    elif month == 2 and (not leap_year):
+    elif month == 2:
         return 28
 
 
@@ -34,11 +31,7 @@ end_year = begin_year + year
 
 # calculate the days
 for y in range(begin_year, end_year):
-    if (judge_leap_year(y)):
-        day = day + 366
-    else:
-        day = day + 365
-
+    day = day + 366 if (judge_leap_year(y)) else day + 365
 leap_year = judge_leap_year(localtime.tm_year)
 for m in range(1, localtime.tm_mon):
     day = day + month_days(m, leap_year)

@@ -21,9 +21,12 @@ def formatAndDisplay(data='', matches=[], corrected=''):
     print('Grammar mistakes & Improvements')
     print('***'*30)
     for match in matches:
-        incorrect_text = match.sentence.replace(match.matchedText, '\033[44;33m{}\033[m'.format(match.matchedText))
-        rule_text = '\033[3;31;40m{}\033[m'.format(match.message)
-        suggestion = '\033[4;32;40m{}\033[m'.format(match.replacements[0])
+        incorrect_text = match.sentence.replace(
+            match.matchedText, f'\033[44;33m{match.matchedText}\033[m'
+        )
+
+        rule_text = f'\033[3;31;40m{match.message}\033[m'
+        suggestion = f'\033[4;32;40m{match.replacements[0]}\033[m'
         print(f"{rule_text} => {incorrect_text}")
         print(f"Suggestion : {suggestion}")
 
@@ -31,7 +34,7 @@ def formatAndDisplay(data='', matches=[], corrected=''):
     print('***'*30)
     print('CORRECTED TEXT')
     print('***'*30)
-    print('\033[3;33;40m{}\033[m'.format(corrected))
+    print(f'\033[3;33;40m{corrected}\033[m')
     print('---'*30)
 
 

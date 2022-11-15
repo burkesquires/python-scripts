@@ -34,8 +34,7 @@ def sign(hash, message, secret):
     digest = hmac.new(secret.encode("utf-8"), 
                 msg=message.encode(),
                 digestmod=hashs.get(hash, hashlib.md5)).digest()
-    signature = base64.b64encode(digest).decode("utf-8")
-    return signature
+    return base64.b64encode(digest).decode("utf-8")
 
 def verify(hash, input, check, secret=None):
     challenge = None
@@ -68,11 +67,10 @@ def main():
         if arguments.sign is not None:
             print(verify(arguments.hash, arguments.file.read(),
                          arguments.verify, arguments.sign))
-            return
         else:
             print(verify(arguments.hash, arguments.file.read(),
                          arguments.verify))
-            return
+        return
     elif arguments.generate:
         if not arguments.file:
             print("Missing input to generate checksum from")

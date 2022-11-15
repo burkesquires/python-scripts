@@ -23,14 +23,17 @@ def showall():
     for repo in user.get_repos():
         r = lambda: random.randint(0, 255)
         color = str('#%02X%02X%02X' % (r(), r(), r()))
-        table.add_row("[bold " + color + "]" + repo.name, "[bold " + color + "]" + repo.url,
-                      "[bold " + color + "]" + str(repo.stargazers_count),
-                      "[bold " + color + "]" + str(repo.open_issues_count),
-                      )
+        table.add_row(
+            f"[bold {color}]{repo.name}",
+            f"[bold {color}]{repo.url}",
+            f"[bold {color}]{str(repo.stargazers_count)}",
+            f"[bold {color}]{str(repo.open_issues_count)}",
+        )
+
     group = Group(
         table,
     )
-    print(Panel(group, title="[bold underline purple]All Repos of " + user.name))
+    print(Panel(group, title=f"[bold underline purple]All Repos of {user.name}"))
     print("\n\n")
 
 
@@ -42,8 +45,11 @@ def showproject(name: str):
     for contributor in repo.get_contributors():
         r = lambda: random.randint(0, 255)
         color = str('#%02X%02X%02X' % (r(), r(), r()))
-        table.add_row("[bold " + color + "]" + contributor.name,
-                      "[bold " + color + "]" + str(contributor.contributions))
+        table.add_row(
+            f"[bold {color}]{contributor.name}",
+            f"[bold {color}]{str(contributor.contributions)}",
+        )
+
     group = Group(
         "[bold green]Owner:[/bold green] " + "[bold]" + repo.owner.name + "[/bold]\n"
                                                                           "[bold blue]URL:[/bold blue] " + "[bold]" + repo.url + "[/bold]\n"
@@ -54,7 +60,7 @@ def showproject(name: str):
         "[bold red]Issues:[/bold red] " + "[bold]" + str(repo.open_issues_count) + "[/bold]",
         table,
     )
-    print(Panel(group, title="[bold underline purple]Details of " + repo.name))
+    print(Panel(group, title=f"[bold underline purple]Details of {repo.name}"))
     print("\n\n")
 
 

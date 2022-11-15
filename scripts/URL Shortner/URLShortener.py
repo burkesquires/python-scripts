@@ -5,7 +5,7 @@ def generateShortURL(URL):
    shortener = pyshorteners.Shortener()
    url = URL
    shorten_url=  shortener.tinyurl.short(url)
-   print("Shorten URL is: " + shorten_url)
+   print(f"Shorten URL is: {shorten_url}")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

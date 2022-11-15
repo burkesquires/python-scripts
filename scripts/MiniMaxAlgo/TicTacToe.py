@@ -36,21 +36,21 @@ class TicTacToe():
         row_ind = math.floor(square / 3)
         row = self.board[row_ind*3:(row_ind+1)*3]
         # print('row', row)
-        if all([s == letter for s in row]):
+        if all(s == letter for s in row):
             return True
         col_ind = square % 3
         column = [self.board[col_ind+i*3] for i in range(3)]
         # print('col', column)
-        if all([s == letter for s in column]):
+        if all(s == letter for s in column):
             return True
         if square % 2 == 0:
             diagonal1 = [self.board[i] for i in [0, 4, 8]]
             # print('diag1', diagonal1)
-            if all([s == letter for s in diagonal1]):
+            if all(s == letter for s in diagonal1):
                 return True
             diagonal2 = [self.board[i] for i in [2, 4, 6]]
             # print('diag2', diagonal2)
-            if all([s == letter for s in diagonal2]):
+            if all(s == letter for s in diagonal2):
                 return True
         return False
 
@@ -71,20 +71,17 @@ def play(game, x_player, o_player, print_game=True):
 
     letter = 'X'
     while game.empty_squares():
-        if letter == 'O':
-            square = o_player.get_move(game)
-        else:
-            square = x_player.get_move(game)
+        square = o_player.get_move(game) if letter == 'O' else x_player.get_move(game)
         if game.make_move(square, letter):
 
             if print_game:
-                print(letter + ' makes a move to square {}'.format(square))
+                print(f'{letter} makes a move to square {square}')
                 game.print_board()
                 print('')
 
             if game.current_winner:
                 if print_game:
-                    print(letter + ' wins!')
+                    print(f'{letter} wins!')
                 return letter  # ends the loop and exits the game
             letter = 'O' if letter == 'X' else 'X'  # switches player
 

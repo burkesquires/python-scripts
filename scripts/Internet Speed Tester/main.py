@@ -14,9 +14,9 @@ def get_speed():
     download_speed = round(download / 8 / 1024 / 1024,2)
     upload_speed = round(upload / 8 / 1024 / 1024,2)
     ping = round(ping, 2)
-    down_lab.config(text='Download Speed : ' + str(download_speed) + " Mbps")
-    upload_lab.config(text='Upload Speed : ' + str(upload_speed) + " Mbps")
-    ping_lab.config(text='Ping : ' + str(ping) + " ms")
+    down_lab.config(text=f'Download Speed : {str(download_speed)} Mbps')
+    upload_lab.config(text=f'Upload Speed : {str(upload_speed)} Mbps')
+    ping_lab.config(text=f'Ping : {str(ping)} ms')
 
 fg = '#0cc6a9'
 bg = '#ed4947'  

@@ -6,7 +6,7 @@ Wkts = int(input("Enter the number of Wickets each side : "))
 Balls = Overs*6
 print("\n")
 
-def Game_1() :
+def Game_1():
 
 	Wkts_P1  = Wkts_P2  = Wkts
 	Balls_P1 = Balls_P2 = Balls
@@ -45,16 +45,16 @@ def Game_1() :
 		Balls_P2 	= Balls_P2 - 1
 		print("Balls left to play : ",Balls_P2)
 
-	if( Wkts_P2 == 0 or P2_score <= Target ) :
+	if ( Wkts_P2 == 0 or P2_score <= Target ):
 		print("\nYou win the game !!!\n")
 
-	elif( Wkts != 0 and P2_score>Target ) :
+	elif Wkts != 0:
 		print("\nBot wins the game !!!\n")
 
 
 
 
-def Game_2() :
+def Game_2():
 
 	Wkts_P1  = Wkts_P2  = Wkts
 	Balls_P1 = Balls_P2 = Balls
@@ -65,7 +65,7 @@ def Game_2() :
 		P2_hand = int(input("Enter your hand : "))
 		P1_hand = random.randint(1,6)
 		print("Bot plays : ",P1_hand)
-		
+
 		if( P1_hand == P2_hand ):
 			Wkts_P1 = Wkts_P1 - 1
 			print("Bot loses a wicket!!\n")
@@ -94,10 +94,10 @@ def Game_2() :
 		Balls_P2 	= Balls_P2 - 1
 		print("Balls left to play : ",Balls_P2,"\n")
 
-	if( Wkts_P2 == 0 or P2_score <= Target ) :
+	if ( Wkts_P2 == 0 or P2_score <= Target ):
 		print("\nBot wins the game !!!\n")
 
-	elif( Wkts != 0 and P2_score>Target ) :
+	elif Wkts != 0:
 		print("\nYou win the game !!!\n")
 		
 

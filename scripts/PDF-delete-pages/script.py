@@ -19,12 +19,8 @@ def pagedel():
         pdf_reader = PdfFileReader(pdf_file)
         num_pages = pdf_reader.numPages
 
-    out_of_index_page = []
-    for num in pages_to_delete:
-        if num > num_pages:
-            out_of_index_page.append(num)
-
-    if len(out_of_index_page) == 0:
+    out_of_index_page = [num for num in pages_to_delete if num > num_pages]
+    if not out_of_index_page:
 
         infile = PdfFileReader(path, "rb")
         output = PdfFileWriter()
@@ -36,7 +32,7 @@ def pagedel():
 
         inputfile_name = ((path.split("\\")[-1]).split(".pdf"))[0]
 
-        output_name = inputfile_name + "_deleted.pdf"
+        output_name = f"{inputfile_name}_deleted.pdf"
 
         with open(output_name, "wb") as f:
             output.write(f)

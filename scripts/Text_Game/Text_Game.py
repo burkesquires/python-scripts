@@ -30,16 +30,16 @@ def smileyface():
 # First obstacle
 def level1():
     question_one = ''
-    while question_one != 'run away' and question_one != 'shoot robot in head':
+    while question_one not in ['run away', 'shoot robot in head']:
         question_one = input('You can currently do two things which is either run away or shoot robot in head, what do you choose: ')
-        
+
         #if chosen option and outcome of option
         if question_one == 'run away':
             time.sleep(3)
             print('Unfortunately you have now been hunted down by an army of robots and have been executed')    
             time.sleep(3)
             print('too bad')
-            
+
 
             # restart for when user fails
             restart = input('Do you wanna restart: ')
@@ -52,7 +52,7 @@ def level1():
             else:
                 print('bye')
                 sys.exit()       
-        
+
         elif question_one == 'shoot robot in head':
             time.sleep(3)
             print('Congratulations you shot the robot in the head and are not dead!!')
@@ -75,7 +75,7 @@ def path():
 # Second obstacle
 def choice():
     question_two = ''
-    while question_two != '1' and question_two != '2':
+    while question_two not in ['1', '2']:
         time.sleep(1)
         question_two = input('So which one do you want to go on, path 1 or 2: ')
     return question_two
@@ -187,7 +187,7 @@ def level2():
 #     question_one = ''
     # while question_one != 'run away' and question_one != 'shoot robot in head':
     items = ''
-    while items != 'tank' and items != 'bomb' and items != 'mech suit':
+    while items not in ['tank', 'bomb', 'mech suit']:
         items = input("which item do you choose - the mech suit, tank or bomb : ")
 
         if (items == 'tank'):
@@ -220,7 +220,7 @@ def level2():
     # while question_one != 'run away' and question_one != 'shoot robot in head':
 def combat_option():
     combat_moves = ''
-    while combat_moves != 'right hook' and combat_moves != 'head butt':
+    while combat_moves not in ['right hook', 'head butt']:
         time.sleep(3)
         combat_moves = input("do you want to throw a right hook or head butt: ")
         if (combat_moves == 'right hook'):
@@ -233,40 +233,40 @@ def combat_option():
             level3()
 
 def suit_options():
-        time.sleep(3)
-        select_option = ''
-        while select_option != 'rocket fist' and select_option != 'missile' and select_option != 'body slam':
-            select_option = input("what would you like to use: rocket fist, missile, body slam: ")
+    time.sleep(3)
+    select_option = ''
+    while select_option not in ['rocket fist', 'missile', 'body slam']:
+        select_option = input("what would you like to use: rocket fist, missile, body slam: ")
 
-            if (select_option == "rocket fist"):
-                time.sleep(3)
-                print('good the cyborg is extremely disorientated')
-                combat_option()
-                # def combat_option():
-                #     combat_moves = ''
-                #     while combat_moves != 'right hook' and combat_moves != 'head butt':
-                #         time.sleep(3)
-                #         combat_moves = input("do you want to throw a right hook or head butt: ")
-                #         if (combat_moves == 'right hook'):
-                #             time.sleep(3)
-                #             print('wow your right hook to the cyborg was so DEVASTATING that it has killed him')
-                #             level3()
-                #         elif (combat_moves == 'head butt'):
-                #             time.sleep(3)
-                #             print('incredible your head butt has KNOCKED OUT the cyborg')
-                #             level3()
+        if (select_option == "rocket fist"):
+            time.sleep(3)
+            print('good the cyborg is extremely disorientated')
+            combat_option()
+            # def combat_option():
+            #     combat_moves = ''
+            #     while combat_moves != 'right hook' and combat_moves != 'head butt':
+            #         time.sleep(3)
+            #         combat_moves = input("do you want to throw a right hook or head butt: ")
+            #         if (combat_moves == 'right hook'):
+            #             time.sleep(3)
+            #             print('wow your right hook to the cyborg was so DEVASTATING that it has killed him')
+            #             level3()
+            #         elif (combat_moves == 'head butt'):
+            #             time.sleep(3)
+            #             print('incredible your head butt has KNOCKED OUT the cyborg')
+            #             level3()
 
-            elif (select_option == 'missile'):
-                time.sleep(3)
-                print('oh no the cyborg is made from vibranium')
-                time.sleep(3)
-                print('the cyborg punches you and takes you back to the robots')
-            elif (select_option == 'body slam'):
-                time.sleep(3)
-                print('the cyborg has been knocked unconsious good job')
-                time.sleep(3)
-                print('u have enough time to run')
-                level3()
+        elif (select_option == 'missile'):
+            time.sleep(3)
+            print('oh no the cyborg is made from vibranium')
+            time.sleep(3)
+            print('the cyborg punches you and takes you back to the robots')
+        elif (select_option == 'body slam'):
+            time.sleep(3)
+            print('the cyborg has been knocked unconsious good job')
+            time.sleep(3)
+            print('u have enough time to run')
+            level3()
 
 def level3():
     time.sleep(3)
@@ -289,7 +289,7 @@ def level3():
 #     question_one = ''
     # while question_one != 'run away' and question_one != 'shoot robot in head':
     message = ''
-    while message != 'yes' and message != 'no':
+    while message not in ['yes', 'no']:
         message = input('Do you want to play the recording: ')
         if message == 'yes':
             time.sleep(2)
@@ -313,35 +313,35 @@ def level3():
             algorithm()
             
 def algorithm():
+    time.sleep(3)
+    initiate = ''
+    while initiate not in ['start', 'terminate']:
+        initiate = input('If you wish to initiate this algorithm please type start or if you wish to terminate the algorithm please type terminate: ')
+        if (initiate == 'start'):
             time.sleep(3)
-            initiate = ''
-            while initiate != 'start' and initiate != 'terminate':
-                initiate = input('If you wish to initiate this algorithm please type start or if you wish to terminate the algorithm please type terminate: ')
-                if (initiate == 'start'):
-                    time.sleep(3)
-                    print('....')
-                    time.sleep(3)
-                    print('beep')
-                    time.sleep(3)
-                    print('boop')
-                    time.sleep(3)
-                    print('boop')
-                    time.sleep(3)
-                    print('beep')
-                    time.sleep(3)
-                    print('Congratulations you have sucessfully killed all of the robots in this timeline !!!!!!')
-                    
+            print('....')
+            time.sleep(3)
+            print('beep')
+            time.sleep(3)
+            print('boop')
+            time.sleep(3)
+            print('boop')
+            time.sleep(3)
+            print('beep')
+            time.sleep(3)
+            print('Congratulations you have sucessfully killed all of the robots in this timeline !!!!!!')
 
-                elif (initiate == 'terminate'):
-                    time.sleep(3)
-                    print('WTF !!!!')
+
+        elif (initiate == 'terminate'):
+            time.sleep(3)
+            print('WTF !!!!')
                     
 
 
 # option to play again at completion of game
 play_again = "yes"
 
-while play_again == "yes" or play_again == "y":
+while play_again in {"yes", "y"}:
     start()
     level1()
     path()
@@ -354,6 +354,6 @@ while play_again == "yes" or play_again == "y":
 
 
 stop_game = "no"
-while stop_game == "no" or stop_game == "n":
-        print('bye')
-        break
+while stop_game in {"no", "n"}:
+    print('bye')
+    break

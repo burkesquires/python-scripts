@@ -33,11 +33,11 @@ class SmartComputerPlayer(Player):
         super().__init__(letter)
 
     def get_move(self, game):
-        if len(game.available_moves()) == 9:
-            square = random.choice(game.available_moves())
-        else:
-            square = self.minimax(game, self.letter)['position']
-        return square
+        return (
+            random.choice(game.available_moves())
+            if len(game.available_moves()) == 9
+            else self.minimax(game, self.letter)['position']
+        )
 
     def minimax(self, state, player):
         max_player = self.letter  # yourself
@@ -63,10 +63,11 @@ class SmartComputerPlayer(Player):
             state.current_winner = None
             sim_score['position'] = possible_move  # this represents the move optimal next move
 
-            if player == max_player:  # X is max player
-                if sim_score['score'] > best['score']:
-                    best = sim_score
-            else:
-                if sim_score['score'] < best['score']:
-                    best = sim_score
+            if (
+                player == max_player
+                and sim_score['score'] > best['score']
+                or player != max_player
+                and sim_score['score'] < best['score']
+            ):
+                best = sim_score
         return best

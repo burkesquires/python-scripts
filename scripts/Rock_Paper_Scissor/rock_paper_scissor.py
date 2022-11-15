@@ -4,7 +4,7 @@ import random
 def getPlayer():
     player = "empty"
     player = input("Please Enter You Choice From - Rock | Paper | Scissor = ")
-    while not (player == "Rock" or player == "Paper" or player == "Scissor"):
+    while player not in ["Rock", "Paper", "Scissor"]:
         player = input("Please Enter You Choice From - Rock | Paper | Scissor = ")
     return player
 

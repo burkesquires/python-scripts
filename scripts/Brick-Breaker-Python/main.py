@@ -72,7 +72,7 @@ class Brick:
             win, self.color, (self.x, self.y, self.width, self.height))
 
     def collide(self, ball):
-        if not (ball.x <= self.x + self.width and ball.x >= self.x):
+        if ball.x > self.x + self.width or ball.x < self.x:
             return False
         if not (ball.y - ball.radius <= self.y + self.height):
             return False
@@ -116,7 +116,7 @@ def ball_collision(ball):
 
 
 def ball_paddle_collision(ball, paddle):
-    if not (ball.x <= paddle.x + paddle.width and ball.x >= paddle.x):
+    if ball.x > paddle.x + paddle.width or ball.x < paddle.x:
         return
     if not (ball.y + ball.radius >= paddle.y):
         return

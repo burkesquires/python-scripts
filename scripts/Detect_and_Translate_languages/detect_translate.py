@@ -56,12 +56,11 @@ def SpeakText(command):
 
 def trans(x, d):
     s = detect(x)
-    result = translator.translate(x, lang_src=s, lang_tgt=d)
-    return result
+    return translator.translate(x, lang_src=s, lang_tgt=d)
 
 
 print("Start speaking.....(To terminate the program say 'Stop!')")
-while(1):
+while 1:
     try:
         with sr.Microphone() as source2:
             r.adjust_for_ambient_noise(source2, duration=0.2)
@@ -70,7 +69,7 @@ while(1):
             MyText.lower()
             if MyText == 'stop':
                 break
-            print("Did you say "+MyText)
+            print(f"Did you say {MyText}")
             d = input(
                 'Enter the language you need the text to be translated into:')
             translated = trans(MyText, d)

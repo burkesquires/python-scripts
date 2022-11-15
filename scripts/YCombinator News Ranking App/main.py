@@ -7,11 +7,8 @@ yc_webpage = response.text
 
 soup = BeautifulSoup(yc_webpage, "html.parser")
 
-articles=[]
 articles_span = soup.find_all(name="span", class_="titleline")
-for item in articles_span:
-    articles.append(item.find(name='a'))
-
+articles = [item.find(name='a') for item in articles_span]
 article_texts = []
 article_links = []
 

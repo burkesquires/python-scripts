@@ -22,14 +22,13 @@ def generate_password(user_letters, user_numbers, user_symbols):
     numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
     symbols = ['!', '#', '$', '%', '&', '(', ')', '*', '+']
 
-    p_letters = [choice(letters) for _ in range(0, user_letters)]
-    p_symbols = [choice(symbols) for _ in range(0, user_symbols)]
-    p_numbers = [choice(numbers) for _ in range(0, user_numbers)]
+    p_letters = [choice(letters) for _ in range(user_letters)]
+    p_symbols = [choice(symbols) for _ in range(user_symbols)]
+    p_numbers = [choice(numbers) for _ in range(user_numbers)]
     pwd = p_letters + p_symbols + p_numbers
     shuffle(pwd)
 
-    password = "".join(pwd)
-    return password
+    return "".join(pwd)
 
 
 with open("save.txt", "a") as file:

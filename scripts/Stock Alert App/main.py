@@ -25,14 +25,12 @@ NEWS_API_KEY = ""
 
 message = "\n"
 
-for key in STOCK_LIST:
+for key, COMPANY_NAME in STOCK_LIST.items():
     stock_params = {
         "function": "TIME_SERIES_DAILY",
         "symbol": key,
         "apikey": STOCK_API_KEY,
     }
-    COMPANY_NAME = STOCK_LIST[key]
-
     response = requests.get(STOCK_ENDPOINT, params=stock_params)
     data = response.json()["Time Series (Daily)"]
     data_list = [value for (key, value) in data.items()]
@@ -60,7 +58,8 @@ for key in STOCK_LIST:
         articles = news_response.json()["articles"]
         article = articles[0]
 
-        message = message + f"{COMPANY_NAME}({key}): {notation}{diff_percent}%\nHeadlines: {article['title']}. \nBrief: {article['description']}\n\n"
+        message = f"{message}{COMPANY_NAME}({key}): {notation}{diff_percent}%\nHeadlines: {article['title']}. \nBrief: {article['description']}\n\n"
+
 
 
 print(message)

@@ -29,14 +29,11 @@ def movers(source, destination):
     try:
         shutil.move(source, destination)
     except OSError as error:
-        print(str(source) + " <= File is open. Error => ", error)
+        print(f"{str(source)} <= File is open. Error => ", error)
 
 
 def our_cat_dir(main_path, filepath):
-    for cat in category:
-        if filepath == os.path.join(main_path, cat):
-            return True
-    return False
+    return any(filepath == os.path.join(main_path, cat) for cat in category)
 
 
 def our_ext_dir(main_path, filepath):
@@ -79,7 +76,7 @@ def org_by_ext(path):
 
 def main():
     global organise_folder, download_path
-    if platform == "linux" or platform == "linux2":
+    if platform in ["linux", "linux2"]:
         download_path = "/home/" + os.environ.get('USERNAME') + "/Downloads"
     elif platform == "win32":
         download_path = "C:\\Users\\" + os.environ.get('USERNAME') + "\\Downloads"
@@ -94,13 +91,11 @@ def main():
             organise_folder = path
         if not os.path.exists(organise_folder):
             print("\nInvalid Path.")
-            continue
+        elif os.path.isdir(organise_folder):
+            break
         else:
-            if os.path.isdir(organise_folder):
-                break
-            else:
-                print("\nEntered Path not a directory.")
-                continue
+            print("\nEntered Path not a directory.")
+            continue
     while True:
         organise_type = input("\nIn what way do you want to organize.\n\t"
                               + "1) Organize files by category.\n\t"

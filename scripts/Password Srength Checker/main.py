@@ -10,7 +10,7 @@ def check():
     else:
         result = PasswordStats(entry.get())
         final = result.strength()
-        label1["text"] = str(math.ceil(final*100)) + " %"
+        label1["text"] = f"{str(math.ceil(final * 100))} %"
         if final >= 0.66:
             w.create_rectangle(105, 50, 300, 100,
                                fill="#27cf54", outline="white")

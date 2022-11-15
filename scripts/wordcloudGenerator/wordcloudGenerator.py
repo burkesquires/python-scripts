@@ -94,15 +94,13 @@ def txt2string(file):
 
 # function to determine the polarity of a given word
 def word_polarity(tokens):
-    counter=0
-    for word in tokens:
+    for counter, word in enumerate(tokens):
         testimonial = TextBlob(word, analyzer=NaiveBayesAnalyzer())
-        p = testimonial.sentiment.p_pos 
+        p = testimonial.sentiment.p_pos
         n = testimonial.sentiment.p_neg
         print(p)
         print(n)
         print(counter)
-        counter+=1
         print(word)
         print("~~~~~~~~~")
         if p>0.5:
@@ -112,9 +110,7 @@ def word_polarity(tokens):
 
 # function that creates the wordcloud based on frequency of words
 def calc_freq(tokens, color_function):
-    frequency = {}
-    for item in tokens:
-        frequency[item] = tokens.count(item)
+    frequency = {item: tokens.count(item) for item in tokens}
     cloud = wordcloud.WordCloud(color_func=color_function,width=800, height=400)
     cloud.generate_from_frequencies(frequency)
     cloud.to_file("/Users/dakshjain/Desktop/wc.png")
@@ -122,78 +118,66 @@ def calc_freq(tokens, color_function):
     return cloud.to_array()
 
 def wordcloud_generator(text):
-  nltk.download('stopwords')
-  nltk.download('wordnet')
-  nltk.download('averaged_perceptron_tagger')
-  nltk.download('movie_reviews')
-  nltk.download('punkt')
-  nltk.download('omw-1.4')
+    nltk.download('stopwords')
+    nltk.download('wordnet')
+    nltk.download('averaged_perceptron_tagger')
+    nltk.download('movie_reviews')
+    nltk.download('punkt')
+    nltk.download('omw-1.4')
 
-  tokenizer = RegexpTokenizer(r'\w+')
-  tokens = tokenizer.tokenize(text)
-  print("tokens created...")
-  
-  stop_words = stopwords.words('english')
-  filtered_token = []
-  for w in tokens:
-    if w not in stop_words and len(w)>3:
-      filtered_token.append(w)
-  print("stop words removed...")
+    tokenizer = RegexpTokenizer(r'\w+')
+    tokens = tokenizer.tokenize(text)
+    print("tokens created...")
 
-  lemmatizer = WordNetLemmatizer()
-  lemmatized_filtered_token = []
-  for w in filtered_token:
-    if len(w)>3:
-      lemmatized_filtered_token.append(lemmatizer.lemmatize(w))
+    stop_words = stopwords.words('english')
+    filtered_token = [w for w in tokens if w not in stop_words and len(w)>3]
+    print("stop words removed...")
 
-  pos_tagged_token = nltk.pos_tag(lemmatized_filtered_token)
-  
-  adjective_tokens_0 = []
-  for w in pos_tagged_token:
-    if w[1] == 'JJ' and len(w[0])>3:
-      adjective_tokens_0.append(w[0])
-  print("Level 1 Adjective sorting done...")
+    lemmatizer = WordNetLemmatizer()
+    lemmatized_filtered_token = [
+        lemmatizer.lemmatize(w) for w in filtered_token if len(w) > 3
+    ]
 
-  x = nltk.pos_tag(adjective_tokens_0)
+    pos_tagged_token = nltk.pos_tag(lemmatized_filtered_token)
 
-  adjective_tokens_1 = []
-  for w in x:
-    if w[1] == 'JJ' and len(w[0])>3:
-      adjective_tokens_1.append(w[0])
-  print("Level 2 Adjective sorting done...")
+    adjective_tokens_0 = [
+        w[0] for w in pos_tagged_token if w[1] == 'JJ' and len(w[0]) > 3
+    ]
 
-  y = nltk.pos_tag(adjective_tokens_1)
+    print("Level 1 Adjective sorting done...")
 
-  adjective_tokens_2 = []
-  for w in y:
-    if w[1] == 'JJ' and len(w[0])>3:
-      adjective_tokens_2.append(w[0])
-  print("Level 3 Adjective sorting done...")
+    x = nltk.pos_tag(adjective_tokens_0)
 
-  freq_dist = FreqDist(adjective_tokens_2)
-  common_words = freq_dist.most_common(5)
-  max_freq_list = []
-  for w in common_words:
-    max_freq_list.append(w[0])
-  print("50 most common words selected for colour sorting... Polarity Finding function called...")
+    adjective_tokens_1 = [w[0] for w in x if w[1] == 'JJ' and len(w[0])>3]
+    print("Level 2 Adjective sorting done...")
 
-  word_polarity(max_freq_list)
+    y = nltk.pos_tag(adjective_tokens_1)
 
-  color_to_words = {
-    		'#00ff00': pos_word_list,
-    		'red': neg_word_list
-	}
-  default_color = 'grey'
-  print("Colours associated with given words...")
+    adjective_tokens_2 = [w[0] for w in y if w[1] == 'JJ' and len(w[0])>3]
+    print("Level 3 Adjective sorting done...")
 
-  grouped_color_func = GroupedColorFunc(color_to_words, default_color)
-  print("Calling Wordcloud Creator...")
-  myimage = calc_freq(adjective_tokens_2,grouped_color_func)
-  print("DISPLAYING THE WORDCLOUD !!")
-  plt.figure( figsize=(20,10), facecolor='k')
-  plt.imshow(myimage)
-  plt.axis('off')
-  plt.show()
+    freq_dist = FreqDist(adjective_tokens_2)
+    common_words = freq_dist.most_common(5)
+    max_freq_list = [w[0] for w in common_words]
+    print("50 most common words selected for colour sorting... Polarity Finding function called...")
+
+    word_polarity(max_freq_list)
+
+    color_to_words = {
+    '#00ff00': pos_word_list,
+    'red': neg_word_list
+    }
+    default_color = 'grey'
+    print("Colours associated with given words...")
+
+    grouped_color_func = GroupedColorFunc(color_to_words, default_color)
+    print("Calling Wordcloud Creator...")
+    myimage = calc_freq(adjective_tokens_2,grouped_color_func)
+    print("DISPLAYING THE WORDCLOUD !!")
+    plt.figure( figsize=(20,10), facecolor='k')
+    plt.imshow(myimage)
+    plt.axis('off')
+    plt.show()
 
 
 # depending upon your input data call any of the 2 functions.
